@@ -6,7 +6,7 @@ export function resolveCurrentBranch(cwd = process.cwd()) {
             if (err) {
                 reject(`获取分支名称失败, e: ${err}`);
             } else {
-                resolve(JSON.stringify(summary));
+                resolve(summary.current);
             }
         })
     })
