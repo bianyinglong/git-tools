@@ -16,13 +16,13 @@ const gitPush = async (branchName, cwd) => {
 
     const res = await execa(
         'git',
-        ['push', 'origin', `head:refs/for/${branchName}`],
+        ['push', 'origin', `HEAD:refs/for/${branchName}`],
         { cwd: cwd }
     );
 
     const content = res.stderr;
 
-    console.log(content);
+    console.log('push 出错=>', content);
 
     if (res.exitCode !== 0) {
         process.exit(1)
@@ -38,9 +38,6 @@ const createCodeReview = async () => {
     const branchName = await resolveCurrentBranch(cwd);
     const content = await gitPush(branchName, cwd);
 }
-
-// program.command();
-// console.log(program.parse(process.argv))
 
 program
     .command('gpush')
